@@ -215,7 +215,18 @@ public class SmartParkingGarage {
     }
 
     private static void displayStatistics() {
-        System.out.println("displayStatistics is not available in this development stage.");
+        double occupancyPercentage = parkedVehicles.size() * 100.0 / MAXIMUM_CAPACITY;
+        int totalProcessed = totalParkedToday + totalDepartedToday;
+
+        System.out.println("\nGarage Statistics");
+        System.out.println("Maximum Capacity : " + MAXIMUM_CAPACITY);
+        System.out.println("Currently Parked : " + parkedVehicles.size());
+        System.out.println("Waiting Vehicles : " + waitingVehicles.size());
+        System.out.println("Available Spaces : " + getAvailableSpaces());
+        System.out.println("Vehicles Parked Today : " + totalParkedToday);
+        System.out.println("Vehicles Departed Today : " + totalDepartedToday);
+        System.out.println("Total Vehicles Processed : " + totalProcessed);
+        System.out.printf("Occupancy : %.0f%%%n", occupancyPercentage);
     }
 
     private static void clearWaitingQueue() {

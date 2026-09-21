@@ -230,15 +230,37 @@ public class SmartParkingGarage {
     }
 
     private static void clearWaitingQueue() {
-        System.out.println("clearWaitingQueue is not available in this development stage.");
+        if (waitingVehicles.isEmpty()) {
+            System.out.println("No vehicles are waiting.");
+            return;
+        }
+
+        System.out.print("Clear every vehicle from the waiting queue? (yes/no): ");
+        String confirmation = scanner.nextLine().trim();
+        if (confirmation.equalsIgnoreCase("yes") || confirmation.equalsIgnoreCase("y")) {
+            waitingVehicles.clear();
+            System.out.println("Waiting queue cleared successfully.");
+        } else {
+            System.out.println("Clear waiting queue operation cancelled.");
+        }
     }
 
     private static void clearParkingGarage() {
-        System.out.println("clearParkingGarage is not available in this development stage.");
+        if (parkedVehicles.isEmpty()) {
+            System.out.println("The parking garage is already empty.");
+            return;
+        }
+
+        parkedVehicles.clear();
+        System.out.println("Parking garage cleared successfully.");
     }
 
     private static void resetSystem() {
-        System.out.println("resetSystem is not available in this development stage.");
+        waitingVehicles.clear();
+        parkedVehicles.clear();
+        totalParkedToday = 0;
+        totalDepartedToday = 0;
+        System.out.println("System successfully reset.");
     }
 
     private static boolean isDuplicateVehicle(String vehicleNumber) {

@@ -114,11 +114,36 @@ public class SmartParkingGarage {
     }
 
     private static void parkVehicle() {
-        System.out.println("parkVehicle is not available in this development stage.");
+        if (waitingVehicles.isEmpty()) {
+            System.out.println("No vehicles are waiting.");
+            return;
+        }
+
+        if (parkedVehicles.size() >= MAXIMUM_CAPACITY) {
+            System.out.println("The parking garage is full.");
+            return;
+        }
+
+        String vehicleNumber = waitingVehicles.poll();
+        parkedVehicles.push(vehicleNumber);
+        totalParkedToday++;
+        System.out.println("Vehicle parked successfully: " + vehicleNumber);
     }
 
     private static void removeVehicle() {
-        System.out.println("removeVehicle is not available in this development stage.");
+        if (parkedVehicles.isEmpty()) {
+            System.out.println("The parking garage is empty.");
+            return;
+        }
+
+        String departedVehicle = parkedVehicles.pop();
+        totalDepartedToday++;
+        System.out.println("Vehicle removed from the garage: " + departedVehicle);
+
+        if (!waitingVehicles.isEmpty()) {
+            System.out.println("A parking space is now available. Parking the next waiting vehicle...");
+            parkVehicle();
+        }
     }
 
     private static void viewNextWaitingVehicle() {

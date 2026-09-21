@@ -96,7 +96,21 @@ public class SmartParkingGarage {
     }
 
     private static void addVehicle() {
-        System.out.println("addVehicle is not available in this development stage.");
+        System.out.print("Enter the vehicle license plate number: ");
+        String vehicleNumber = normalizeVehicleNumber(scanner.nextLine());
+
+        if (vehicleNumber.isEmpty()) {
+            System.out.println("Vehicle number cannot be blank.");
+            return;
+        }
+
+        if (isDuplicateVehicle(vehicleNumber)) {
+            System.out.println("Vehicle already exists in the system.");
+            return;
+        }
+
+        waitingVehicles.offer(vehicleNumber);
+        System.out.println("Vehicle " + vehicleNumber + " added to the waiting queue successfully.");
     }
 
     private static void parkVehicle() {

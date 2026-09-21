@@ -195,7 +195,23 @@ public class SmartParkingGarage {
     }
 
     private static void searchVehicle() {
-        System.out.println("searchVehicle is not available in this development stage.");
+        if (waitingVehicles.isEmpty() && parkedVehicles.isEmpty()) {
+            System.out.println("The system contains no vehicles to search.");
+            return;
+        }
+
+        System.out.print("Enter the vehicle number to search: ");
+        String vehicleNumber = normalizeVehicleNumber(scanner.nextLine());
+
+        if (vehicleNumber.isEmpty()) {
+            System.out.println("Vehicle number cannot be blank.");
+        } else if (waitingVehicles.contains(vehicleNumber)) {
+            System.out.println("Vehicle is waiting in the queue.");
+        } else if (parkedVehicles.contains(vehicleNumber)) {
+            System.out.println("Vehicle is parked in the garage.");
+        } else {
+            System.out.println("Vehicle not found.");
+        }
     }
 
     private static void displayStatistics() {

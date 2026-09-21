@@ -147,19 +147,51 @@ public class SmartParkingGarage {
     }
 
     private static void viewNextWaitingVehicle() {
-        System.out.println("viewNextWaitingVehicle is not available in this development stage.");
+        if (waitingVehicles.isEmpty()) {
+            System.out.println("No vehicles are waiting.");
+        } else {
+            System.out.println("Next waiting vehicle: " + waitingVehicles.peek());
+        }
     }
 
     private static void viewLastParkedVehicle() {
-        System.out.println("viewLastParkedVehicle is not available in this development stage.");
+        if (parkedVehicles.isEmpty()) {
+            System.out.println("The parking garage is empty.");
+        } else {
+            System.out.println("Last parked vehicle: " + parkedVehicles.peek());
+        }
     }
 
     private static void displayWaitingQueue() {
-        System.out.println("displayWaitingQueue is not available in this development stage.");
+        if (waitingVehicles.isEmpty()) {
+            System.out.println("No vehicles are waiting.");
+            return;
+        }
+
+        System.out.println("\nWaiting Vehicles (first to last):");
+        int position = 1;
+        for (String vehicleNumber : waitingVehicles) {
+            System.out.println(position + ". " + vehicleNumber);
+            position++;
+        }
+        System.out.println("Total Waiting Vehicles: " + waitingVehicles.size());
     }
 
     private static void displayParkedVehicles() {
-        System.out.println("displayParkedVehicles is not available in this development stage.");
+        if (parkedVehicles.isEmpty()) {
+            System.out.println("The parking garage is empty.");
+        } else {
+            System.out.println("\nParked Vehicles (newest to oldest):");
+            int position = 1;
+            for (int index = parkedVehicles.size() - 1; index >= 0; index--) {
+                System.out.println(position + ". " + parkedVehicles.get(index));
+                position++;
+            }
+        }
+
+        System.out.println("Garage Capacity : " + MAXIMUM_CAPACITY);
+        System.out.println("Occupied Spaces : " + parkedVehicles.size());
+        System.out.println("Available Spaces : " + getAvailableSpaces());
     }
 
     private static void searchVehicle() {
